@@ -4,7 +4,7 @@
 Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
-Version:    25.0.1614.18
+Version:    25.0.1614.31
 Release:    1%{dist}
 Epoch:      5
 
@@ -145,7 +145,10 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 
 %changelog
-* Wed Sep 24 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:25.0.1618.11-1
+* Tue Sep 30 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:25.0.1614.31-1
+- Update to 25.0.1614.31
+
+* Wed Sep 24 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:25.0.1614.18-1
 - Update to 25.0.1614.18
 
 * Fri Sep 19 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:25.0.1614.11-1
