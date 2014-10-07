@@ -1,10 +1,10 @@
 %define debug_package %{nil}
-%define libssl_ubuntu libssl1.0.0_1.0.1-4ubuntu5.17
+%define libssl_ubuntu libssl1.0.0_1.0.1-4ubuntu5.18
 
 Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
-Version:    25.0.1614.31
+Version:    25.0.1614.35
 Release:    1%{dist}
 Epoch:      5
 
@@ -145,6 +145,10 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 
 %changelog
+* Tue Oct 07 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:25.0.1614.35-1
+- Update to 25.0.1614.35
+- Update bundled libssl from Ubuntu 12.04 to 1.0.0_1.0.1-4ubuntu5.18
+
 * Tue Sep 30 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:25.0.1614.31-1
 - Update to 25.0.1614.31
 
