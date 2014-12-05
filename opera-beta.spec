@@ -1,20 +1,20 @@
 %define debug_package %{nil}
-%define libssl_ubuntu libssl1.0.0_1.0.1-4ubuntu5.20
+#%define libssl_ubuntu libssl1.0.0_1.0.1-4ubuntu5.20
 
 Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
 Version:    26.0.1656.20
-Release:    1%{dist}
+Release:    2%{dist}
 Epoch:      5
 
 Group:      Applications/Internet
 License:    Proprietary
 URL:        http://www.opera.com/browser
 Source0:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_amd64.deb
-Source1:    http://de.archive.ubuntu.com/ubuntu/pool/main/o/openssl/%{libssl_ubuntu}_amd64.deb
-Source2:    opera_autoupdate
-Source3:    opera_crashreporter
+#Source1:    http://de.archive.ubuntu.com/ubuntu/pool/main/o/openssl/%{libssl_ubuntu}_amd64.deb
+#Source2:    opera_autoupdate
+#Source3:    opera_crashreporter
 
 BuildRequires:  desktop-file-utils
 
@@ -51,11 +51,11 @@ mkdir -p %{buildroot}
 pushd %{buildroot}
     ar p %{SOURCE0} data.tar.xz | xz -d > %{name}-%{version}.x86_64.tar
     tar -xf %{name}-%{version}.x86_64.tar
-    mkdir %{libssl_ubuntu}.x86_64
-    pushd %{libssl_ubuntu}.x86_64
-        ar p %{SOURCE1} data.tar.gz | gzip -d > %{libssl_ubuntu}.x86_64.tar
-        tar -xf %{libssl_ubuntu}.x86_64.tar
-    popd
+#    mkdir %{libssl_ubuntu}.x86_64
+#    pushd %{libssl_ubuntu}.x86_64
+#        ar p %{SOURCE1} data.tar.gz | gzip -d > %{libssl_ubuntu}.x86_64.tar
+#        tar -xf %{libssl_ubuntu}.x86_64.tar
+#    popd
 popd
 
 # Move /usr/lib/x86_64-linux-gnu/%{name} to %{_libdir}:
@@ -77,23 +77,26 @@ desktop-file-install --vendor rfremix \
   --delete-original \
   %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-# Install bundled dependencies on libs from Ubuntu 12.04:
+# Create necessary symbolic links
+## Install bundled dependencies on libs from Ubuntu 12.04:
 mkdir -p %{buildroot}%{_libdir}/%{name}/lib
 pushd %{buildroot}%{_libdir}/%{name}/lib
     ln -s ../../libudev.so.1 libudev.so.0
-    mv %{buildroot}/%{libssl_ubuntu}.x86_64/lib/x86_64-linux-gnu/libcrypto.so.1.0.0 libcrypto.so.1.0.0
-    mv %{buildroot}/%{libssl_ubuntu}.x86_64/lib/x86_64-linux-gnu/libssl.so.1.0.0 libssl.so.1.0.0
+    ln -s %{_libdir}/libcrypto.so.10 libcrypto.so.1.0.0
+    ln -s %{_libdir}/libssl.so.10 libssl.so.1.0.0
+#    mv %{buildroot}/%{libssl_ubuntu}.x86_64/lib/x86_64-linux-gnu/libcrypto.so.1.0.0 libcrypto.so.1.0.0
+#    mv %{buildroot}/%{libssl_ubuntu}.x86_64/lib/x86_64-linux-gnu/libssl.so.1.0.0 libssl.so.1.0.0
 popd
 
-# Add wrapper scripts for opera_autoupdate and opera_crashreporter binaries:
-pushd %{buildroot}%{_libdir}/%{name}
-    mv opera_autoupdate opera_autoupdate_orig
-    mv opera_crashreporter opera_crashreporter_orig
-    install -m 755 %{SOURCE2} opera_autoupdate
-    install -m 755 %{SOURCE3} opera_crashreporter
-    chmod +x opera_autoupdate
-    chmod +x opera_crashreporter
-popd
+## Add wrapper scripts for opera_autoupdate and opera_crashreporter binaries:
+#pushd %{buildroot}%{_libdir}/%{name}
+#    mv opera_autoupdate opera_autoupdate_orig
+#    mv opera_crashreporter opera_crashreporter_orig
+#    install -m 755 %{SOURCE2} opera_autoupdate
+#    install -m 755 %{SOURCE3} opera_crashreporter
+#    chmod +x opera_autoupdate
+#    chmod +x opera_crashreporter
+#popd
 
 # Fix symlink:
 pushd %{buildroot}%{_bindir}
@@ -111,10 +114,14 @@ chmod 4755 %{buildroot}%{_libdir}/%{name}/opera_sandbox
 # Remove unused directories and tarball:
 pushd %{buildroot}
     rm %{name}-%{version}.x86_64.tar
-    rm -rf %{libssl_ubuntu}.x86_64
+#    rm -rf %{libssl_ubuntu}.x86_64
     rm -rf %{buildroot}%{_datadir}/lintian
     rm -rf %{buildroot}%{_datadir}/menu
 popd
+
+# Remove rpath
+find %{buildroot} -name "opera_autoupdate" -exec chrpath --delete {} \; 2>/dev/null
+find %{buildroot} -name "opera_crashreporter" -exec chrpath --delete {} \; 2>/dev/null
 
 %post
 update-desktop-database &> /dev/null || :
@@ -145,6 +152,10 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 
 %changelog
+* Fri Dec 05 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:26.0.1656.20-2
+- Remove wrapper scripts for opera_autoupdate and opera_crashreporter binaries
+- Remove bundled libs from Ubuntu 12.04
+
 * Mon Nov 17 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:26.0.1656.20-1
 - Update to 26.0.1656.20
 
