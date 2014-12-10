@@ -5,7 +5,7 @@ Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
 Version:    26.0.1656.20
-Release:    2%{dist}
+Release:    3%{dist}
 Epoch:      5
 
 Group:      Applications/Internet
@@ -17,6 +17,7 @@ Source0:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_
 #Source3:    opera_crashreporter
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  chrpath
 
 Provides:   libcrypto.so.1.0.0()(64bit)
 Provides:   libcrypto.so.1.0.0(OPENSSL_1.0.0)(64bit)
@@ -152,6 +153,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 
 %changelog
+* Wed Dec 10 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:26.0.1656.20-3
+- Add BR: chrpath
+
 * Fri Dec 05 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:26.0.1656.20-2
 - Remove wrapper scripts for opera_autoupdate and opera_crashreporter binaries
 - Remove bundled libs from Ubuntu 12.04
