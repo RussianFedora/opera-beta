@@ -4,7 +4,7 @@ Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
 Version:    27.0.1689.33
-Release:    1%{dist}
+Release:    2%{dist}
 Epoch:      5
 
 Group:      Applications/Internet
@@ -13,10 +13,10 @@ URL:        http://www.opera.com/browser
 Source0:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_amd64.deb
 
 BuildRequires:  desktop-file-utils
-BuildRequires:  chrpath
+# BuildRequires:  chrpath
 
-Provides:   libcrypto.so.1.0.0()(64bit)
-Provides:   libcrypto.so.1.0.0(OPENSSL_1.0.0)(64bit)
+# Provides:   libcrypto.so.1.0.0()(64bit)
+# Provides:   libcrypto.so.1.0.0(OPENSSL_1.0.0)(64bit)
 Provides:   libssl.so.1.0.0()(64bit)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.0)(64bit)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.1)(64bit)
@@ -72,7 +72,7 @@ desktop-file-install --vendor rfremix \
 mkdir -p %{buildroot}%{_libdir}/%{name}/lib
 pushd %{buildroot}%{_libdir}/%{name}/lib
     ln -s ../../libudev.so.1 libudev.so.0
-    ln -s %{_libdir}/libcrypto.so.10 libcrypto.so.1.0.0
+#   ln -s %{_libdir}/libcrypto.so.10 libcrypto.so.1.0.0
     ln -s %{_libdir}/libssl.so.10 libssl.so.1.0.0
 popd
 
@@ -96,9 +96,9 @@ pushd %{buildroot}
     rm -rf %{buildroot}%{_datadir}/menu
 popd
 
-# Remove rpath
-find %{buildroot} -name "opera_autoupdate" -exec chrpath --delete {} \; 2>/dev/null
-find %{buildroot} -name "opera_crashreporter" -exec chrpath --delete {} \; 2>/dev/null
+## Remove rpath
+# find %{buildroot} -name "opera_autoupdate" -exec chrpath --delete {} \; 2>/dev/null
+# find %{buildroot} -name "opera_crashreporter" -exec chrpath --delete {} \; 2>/dev/null
 
 %post
 update-desktop-database &> /dev/null || :
@@ -129,6 +129,12 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/*
 
 %changelog
+* Tue Dec 23 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-2
+- Remove libcrypto.so symlink
+  http://ruario.ghost.io/2014/12/19/installing-opera-on-distributions-other-than-debian-ubuntu-or-derivatives/#comment-1751015398
+- Remove chrpath action:
+  http://ruario.ghost.io/2014/12/15/opera-packages-for-fedora-with-updates/#comment-1755224247
+
 * Sat Dec 20 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-1
 - Update to 27.0.1689.33
 - Clean up spec file
