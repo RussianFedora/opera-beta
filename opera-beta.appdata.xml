@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 carasin berlogue <carasin.berlogue@mail.ru> -->
+<component type="desktop">
+​  <id>rfremix-opera-beta.desktop</id>
+​  <metadata_license>CC0</metadata_license>
+​  <project_license>Proprietary</project_license>
+​  <name>Opera beta</name>
+​  <summary>Fast and secure web browser (Beta stream)</summary>
+  <summary xml:lang="ru">Быстрый и безопасный Веб-браузер (бета-версия)</summary>
+​
+​  <description>
+    <p>
+      Opera is a fast, secure and user-friendly web browser. It
+      includes web developer tools, news aggregation, and the ability
+      to compress data via Opera Turbo on congested networks.
+    </p>
+    <p xml:lang="ru">
+      Opera — это быстрый, безопасный и дружественный к пользователю
+      веб-браузер. Он включает средства веб-разработки и сбора новостей,
+      а также возможность сжимать трафик в перегруженных сетях
+      посредством технологии Opera Turbo.
+    </p>
+    <p>
+      This is the beta version of the browser. For everyday use
+      install the stable version.
+    </p>
+    <p xml:lang="ru">
+      Это бета-версия браузера. Для повседневного использования
+      установите стабильную версию.
+    </p>
+​  </description>
+
+  <screenshots>
+    <screenshot type="default">http://www-static.opera.com/static-heap/8c/8cebaeffb6c7669162a159e005521fa052d5db87/vip-access-for-your-favorite-sites.jpg</screenshot>
+    <screenshot>http://www-static.opera.com/static-heap/7c/7c5ffc1c78bde23e87784e1e91b51acc719139ea/find-something-unexpected.jpg</screenshot>
+    <screenshot>http://www-static.opera.com/static-heap/be/be2c10fba6490784db12e9d81bd2fcb6f39dff3a/stay-safe-on-the-web.jpg</screenshot>
+    <screenshot>http://www-static.opera.com/static-heap/52/524cc9f4e27ffece9a9e941fb6a90ff662d991c7/search-and-navigate-easily.jpg</screenshot>
+    <screenshot>http://www-static.opera.com/static-heap/b2/b291bd57a0559cbb01d5171d86786157aa466cb5/more-than-bookmarks.jpg</screenshot>
+  </screenshots>
+
+​  <url type="homepage">http://www.opera.com</url>
+​
+  <icon type="stock">opera-beta</icon>
+​  <icon type="cached">opera-beta.png</icon>
+  ​<icon type="local">/usr/share/icons/hicolor/128x128/apps/opera-beta.png</icon>
+  ​<icon type="remote">http://www-static.opera.com/static-heap/fc/fc18cbf495d7d9b81f756f696862c31fbb2011b5/icon-opera-next-2013.png</icon>
+
+​  <categories>
+​    <category>Network</category>
+​    <category>WebBrowser</category>
+​  </categories>
+  
+​  <developer_name>OPERA SOFTWARE ASA</developer_name>
+
+  ​<architectures>
+​    <arch>x86_64</arch>
+​  </architectures>
+</component>
