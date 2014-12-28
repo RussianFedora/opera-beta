@@ -4,16 +4,19 @@ Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
 Version:    27.0.1689.33
-Release:    3%{dist}
+Release:    4%{dist}
 Epoch:      5
 
 Group:      Applications/Internet
 License:    Proprietary
 URL:        http://www.opera.com/browser
 Source0:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_amd64.deb
-Source1:    %{name}.appdata.xml
+Source1:    rfremix-%{name}.appdata.xml
 
 BuildRequires:  desktop-file-utils
+%if 0%{?fedora} >= 20
+BuildRequires:  libappstream-glib
+%endif
 # BuildRequires:  chrpath
 
 # Provides:   libcrypto.so.1.0.0()(64bit)
@@ -65,7 +68,6 @@ desktop-file-install --vendor rfremix \
   --dir %{buildroot}%{_datadir}/applications \
   --add-category Network \
   --add-category WebBrowser \
-# --add-category X-Fedora \
   --delete-original \
   %{buildroot}%{_datadir}/applications/%{name}.desktop
 
@@ -102,9 +104,14 @@ popd
 # find %{buildroot} -name "opera_crashreporter" -exec chrpath --delete {} \; 2>/dev/null
 
 # Install appstream data
-%if (0%{?fedora} >= 20) && (0%{?rhel} >= 8)
+%if 0%{?fedora} >= 20
     mkdir -p %{buildroot}%{_datadir}/appdata
-    install -pm 644 %{SOURCE1} %{buildroot}%{_datadir}/appdata/%{name}.appdata.xml
+    install -pm 644 %{SOURCE1} %{buildroot}%{_datadir}/appdata/rfremix-%{name}.appdata.xml
+%endif
+
+%if 0%{?fedora} >= 20
+%check
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/rfremix-%{name}.appdata.xml
 %endif
 
 %post
@@ -134,8 +141,16 @@ rm -rf %{buildroot}
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/*
 %{_datadir}/pixmaps/*
+%if 0%{?fedora} >= 20
+    %{_datadir}/appdata/rfremix-%{name}.appdata.xml
+%endif
 
 %changelog
+* Sun Dec 28 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-4
+- Fixed <files> section
+- Remove RHEL >=8 condition
+- Add <check> section
+
 * Sat Dec 27 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-3
 - Add appdata.xml for Fedora >=20 and RHEL >=8
 - Remove category X-Fedora from *.desktop file
