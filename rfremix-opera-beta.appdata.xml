@@ -39,20 +39,6 @@
   </screenshots>
 
 ​  <url type="homepage">http://www.opera.com</url>
-​
-  <icon type="stock">opera-beta</icon>
-​  <icon type="cached">opera-beta.png</icon>
-  ​<icon type="local">/usr/share/icons/hicolor/128x128/apps/opera-beta.png</icon>
-  ​<icon type="remote">http://www-static.opera.com/static-heap/fc/fc18cbf495d7d9b81f756f696862c31fbb2011b5/icon-opera-next-2013.png</icon>
-
-​  <categories>
-​    <category>Network</category>
-​    <category>WebBrowser</category>
-​  </categories>
-  
 ​  <developer_name>OPERA SOFTWARE ASA</developer_name>
 
-  ​<architectures>
-​    <arch>x86_64</arch>
-​  </architectures>
 </component>
