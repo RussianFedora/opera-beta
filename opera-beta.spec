@@ -4,7 +4,7 @@ Summary:        Web Browser for Linux
 Summary(ru):    Веб-браузер для Linux
 Name:           opera-beta
 Version:    27.0.1689.33
-Release:    4%{dist}
+Release:    4.1%{dist}
 Epoch:      5
 
 Group:      Applications/Internet
@@ -146,13 +146,16 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Mon Dec 29 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-4.1
+- Remove <icon>, <categories> and <architectures> sections from *.appdata.xml
+
 * Sun Dec 28 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-4
 - Fixed <files> section
 - Remove RHEL >=8 condition
 - Add <check> section
 
 * Sat Dec 27 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-3
-- Add appdata.xml for Fedora >=20 and RHEL >=8
+- Add *.appdata.xml for Fedora >=20 and RHEL >=8
 - Remove category X-Fedora from *.desktop file
 
 * Tue Dec 23 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-2
