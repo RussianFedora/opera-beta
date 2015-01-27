@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
-Summary:        Web Browser for Linux
-Summary(ru):    Веб-браузер для Linux
+Summary:        Fast and secure web browser (Beta stream)
+Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
 Version:    27.0.1689.44
 Release:    1%{dist}
@@ -147,7 +147,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Mon Dec 29 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.44-1
-- Update to 28.0.1689.44
+- Update to 27.0.1689.44
 
 * Mon Dec 29 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.33-4.1
 - Remove <icon>, <categories> and <architectures> sections from *.appdata.xml
