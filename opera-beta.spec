@@ -3,7 +3,7 @@
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    27.0.1689.44
+Version:    28.0.1750.15
 Release:    1%{dist}
 Epoch:      5
 
@@ -24,7 +24,7 @@ BuildRequires:  libappstream-glib
 Provides:   libssl.so.1.0.0()(64bit)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.0)(64bit)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.1)(64bit)
-Provides:   libudev.so.0()(64bit)
+# Provides:   libudev.so.0()(64bit)
 
 ExclusiveArch:    x86_64
 
@@ -71,10 +71,10 @@ desktop-file-install --vendor rfremix \
   --delete-original \
   %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-# Create necessary symbolic links
+# Create necessary symbolic link
 mkdir -p %{buildroot}%{_libdir}/%{name}/lib
 pushd %{buildroot}%{_libdir}/%{name}/lib
-    ln -s ../../libudev.so.1 libudev.so.0
+#   ln -s ../../libudev.so.1 libudev.so.0
 #   ln -s %{_libdir}/libcrypto.so.10 libcrypto.so.1.0.0
     ln -s %{_libdir}/libssl.so.10 libssl.so.1.0.0
 popd
@@ -146,6 +146,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Feb 07 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:28.0.1750.15-1
+- Update to 28.0.1750.15
+
 * Mon Dec 29 2014 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:27.0.1689.44-1
 - Update to 27.0.1689.44
 
