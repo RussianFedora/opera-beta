@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 carasin berlogue <carasin.berlogue@mail.ru> -->
 <component type="desktop">
-​  <id>rfremix-opera-beta.desktop</id>
-​  <metadata_license>CC0</metadata_license>
-​  <project_license>Proprietary</project_license>
-​  <name>Opera beta</name>
-​  <summary>Fast and secure web browser (Beta stream)</summary>
+  <id>rfremix-opera-beta.desktop</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>Proprietary</project_license>
+  <name>Opera beta</name>
+  <summary>Fast and secure web browser (Beta stream)</summary>
   <summary xml:lang="ru">Быстрый и безопасный Веб-браузер (бета-версия)</summary>
-​
-​  <description>
+
+  <description>
     <p>
       Opera is a fast, secure and user-friendly web browser. It
       includes web developer tools, news aggregation, and the ability
@@ -28,7 +28,7 @@
       Это бета-версия браузера. Для повседневного использования
       установите стабильную версию.
     </p>
-​  </description>
+  </description>
 
   <screenshots>
     <screenshot type="default">http://www-static.opera.com/static-heap/8c/8cebaeffb6c7669162a159e005521fa052d5db87/vip-access-for-your-favorite-sites.jpg</screenshot>
@@ -38,8 +38,8 @@
     <screenshot>http://www-static.opera.com/static-heap/b2/b291bd57a0559cbb01d5171d86786157aa466cb5/more-than-bookmarks.jpg</screenshot>
   </screenshots>
 
-​  <url type="homepage">http://www.opera.com</url>
-​  <developer_name>OPERA SOFTWARE ASA</developer_name>
+  <url type="homepage">http://www.opera.com</url>
+  <developer_name>OPERA SOFTWARE ASA</developer_name>
   <updatecontact>carasin.berlogue_at_mail.ru</updatecontact>
 
 </component>
