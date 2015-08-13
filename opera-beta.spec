@@ -1,13 +1,13 @@
 %global build_for_x86_64 1
 %global build_for_i386 0
 %define debug_package %{nil}
-%define major_ver 31
+%define major_ver 32
 
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    %{major_ver}.0.1889.98
-Release:    2%{dist}
+Version:    %{major_ver}.0.1948.4
+Release:    1%{dist}
 Epoch:      5
 
 Group:      Applications/Internet
@@ -189,8 +189,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Aug 13 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:32.0.1948.4-1
+- Update to 32.0.1948.4
+
 * Sat Aug 08 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:31.0.1889.98-2
-- Add Provides: libssl.so.1.0.0
+- Add Provides: libffmpeg.so
 - Fix <provides> section for 32 bit builds
 
 * Thu Jul 30 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:31.0.1889.98-1
