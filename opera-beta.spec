@@ -1,12 +1,13 @@
 %global build_for_x86_64 1
 %global build_for_i386 0
+%global build_from_rpm 0
 %define debug_package %{nil}
 %define major_ver 34
 
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    %{major_ver}.0.2036.3
+Version:    %{major_ver}.0.2036.16
 Release:    1%{dist}
 Epoch:      5
 
@@ -15,11 +16,19 @@ License:    Proprietary
 URL:        http://www.opera.com/browser
 
 %if 0%{?build_for_x86_64}
+%if 0%{?build_from_rpm}
+Source0:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_amd64.rpm
+%else
 Source0:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_amd64.deb
+%endif
 %endif
 
 %if 0%{?build_for_i386}
+%if 0%{?build_from_rpm}
+Source1:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_i386.rpm
+%else
 Source1:    ftp://ftp.opera.com/pub/%{name}/%{version}/linux/%{name}_%{version}_i386.deb
+%endif
 %endif
 
 Source2:    rfremix-%{name}.appdata.xml
@@ -79,29 +88,43 @@ Opera — это быстрый, безопасный и дружественн�
 rm -rf %{buildroot}
 mkdir -p %{buildroot}
 
-# Extract DEB packages:
+# Extract DEB/RPM packages:
 pushd %{buildroot}
     %ifarch x86_64
-        ar p %{SOURCE0} data.tar.xz | xz -d > %{name}-%{version}.x86_64.tar
-        tar -xf %{name}-%{version}.x86_64.tar
+        %if 0%{?build_from_rpm}
+            rpm2cpio %{SOURCE0} | cpio -idV --quiet
+        %else
+            ar p %{SOURCE0} data.tar.xz | xz -d > %{name}-%{version}.x86_64.tar
+            tar -xf %{name}-%{version}.x86_64.tar
+        %endif
     %else
-        ar p %{SOURCE1} data.tar.xz | xz -d > %{name}-%{version}.i386.tar
-        tar -xf %{name}-%{version}.i386.tar
+        %if 0%{?build_from_rpm}
+            rpm2cpio %{SOURCE1} | cpio -idV --quiet
+        %else
+            ar p %{SOURCE1} data.tar.xz | xz -d > %{name}-%{version}.i386.tar
+            tar -xf %{name}-%{version}.i386.tar
+        %endif
     %endif
 popd
 
-# Move /usr/lib/%{arch}-linux-gnu/%{name} to %{_libdir}:
-%ifarch x86_64
-    mv %{buildroot}/usr/lib/x86_64-linux-gnu/%{name} %{buildroot}/usr/lib/
-    rm -rf %{buildroot}/usr/lib/x86_64-linux-gnu
-    mv %{buildroot}/usr/lib %{buildroot}%{_libdir}
-%else
-    mv %{buildroot}%{_libdir}/i386-linux-gnu/%{name} %{buildroot}%{_libdir}
-    rm -rf %{buildroot}%{_libdir}/i386-linux-gnu
+# Move /usr/lib/%{arch}-linux-gnu/%{name} to %{_libdir} (for DEB source):
+%if !0%{?build_from_rpm}
+    %ifarch x86_64
+        mv %{buildroot}/usr/lib/x86_64-linux-gnu/%{name} %{buildroot}/usr/lib/
+        rm -rf %{buildroot}/usr/lib/x86_64-linux-gnu
+        mv %{buildroot}/usr/lib %{buildroot}%{_libdir}
+    %else
+        mv %{buildroot}%{_libdir}/i386-linux-gnu/%{name} %{buildroot}%{_libdir}
+        rm -rf %{buildroot}%{_libdir}/i386-linux-gnu
+    %endif
 %endif
 
 # Modify DOC directory and *.desktop file:
-mv %{buildroot}%{_datadir}/doc/%{name} %{buildroot}%{_datadir}/doc/%{name}-%{version}
+if [ -d %{buildroot}%{_datadir}/doc/%{name}/ ]; then
+    mv %{buildroot}%{_datadir}/doc/%{name} %{buildroot}%{_datadir}/doc/%{name}-%{version}
+else
+    mkdir -p %{buildroot}%{_datadir}/doc/%{name}-%{version}
+fi
 sed -e 's/TargetEnvironment=Unity/#TargetEnvironment=Unity/g' -i %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 # Install *.desktop file:
@@ -120,29 +143,33 @@ pushd %{buildroot}%{_libdir}/%{name}/lib
     ln -s %{_libdir}/libssl.so.10 libssl.so.1.0.0
 popd
 
-# Fix symlink:
-pushd %{buildroot}%{_bindir}
-    rm %{name}
-    %ifarch x86_64
-        ln -s ../lib64/%{name}/%{name} %{name}
-    %else
-        ln -s ../lib/%{name}/%{name} %{name}
-    %endif
-popd
+# Fix symlink (for DEB source):
+%if !0%{?build_from_rpm}
+    pushd %{buildroot}%{_bindir}
+        rm %{name}
+        %ifarch x86_64
+            ln -s ../lib64/%{name}/%{name} %{name}
+        %else
+            ln -s ../lib/%{name}/%{name} %{name}
+        %endif
+    popd
+%endif
 
 # Fix <opera_sandbox> attributes:
 chmod 4755 %{buildroot}%{_libdir}/%{name}/opera_sandbox
 
-# Remove unused directories and tarball:
-pushd %{buildroot}
-    %ifarch x86_64
-        rm %{name}-%{version}.x86_64.tar
-    %else
-        rm %{name}-%{version}.i386.tar
-    %endif
-    rm -rf %{buildroot}%{_datadir}/lintian
-    rm -rf %{buildroot}%{_datadir}/menu
-popd
+# Remove unused directories and tarball (for DEB source):
+%if !0%{?build_from_rpm}
+    pushd %{buildroot}
+        %ifarch x86_64
+            rm %{name}-%{version}.x86_64.tar
+        %else
+            rm %{name}-%{version}.i386.tar
+        %endif
+        rm -rf %{buildroot}%{_datadir}/lintian
+        rm -rf %{buildroot}%{_datadir}/menu
+    popd
+%endif
 
 ## Remove rpath
 # find %{buildroot} -name "opera_autoupdate" -exec chrpath --delete {} \; 2>/dev/null
@@ -186,10 +213,14 @@ rm -rf %{buildroot}
 %{_datadir}/mime/packages/*
 %{_datadir}/pixmaps/*
 %if 0%{?fedora} >= 20
-    %{_datadir}/appdata/rfremix-%{name}.appdata.xml
+%{_datadir}/appdata/rfremix-%{name}.appdata.xml
 %endif
 
 %changelog
+* Fri Nov 27 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:34.0.2036.16-1
+- Update to 34.0.2036.16
+- Add switchers for RPM / DEB source packages
+
 * Mon Nov 09 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:34.0.2036.3-1
 - Update to 34.0.2036.3
 
