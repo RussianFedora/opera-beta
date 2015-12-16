@@ -1,13 +1,12 @@
 %global build_for_x86_64 1
-%global build_for_i386 0
-%global build_from_rpm 0
+%global build_for_i386 1
+%global build_from_rpm 1
 %define debug_package %{nil}
-%define major_ver 34
 
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    %{major_ver}.0.2036.24
+Version:    35.0.2066.10
 Release:    1%{dist}
 Epoch:      5
 
@@ -48,12 +47,12 @@ BuildRequires:  libappstream-glib
 Provides:   libssl.so.1.0.0()(64bit)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.0)(64bit)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.1)(64bit)
-Provides:   libffmpeg.so.%{major_ver}()(64bit)
+Provides:   libffmpeg.so()(64bit)
 %else
 Provides:   libssl.so.1.0.0
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.0)
 Provides:   libssl.so.1.0.0(OPENSSL_1.0.1)
-Provides:   libffmpeg.so.%{major_ver}
+Provides:   libffmpeg.so
 %endif
 
 %if 0%{?build_for_x86_64}
@@ -217,6 +216,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Wed Dec 16 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:35.0.2066.10-1
+- Update to 35.0.2066.10
+
 * Thu Dec 03 2015 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:34.0.2036.24-1
 - Update to 34.0.2036.24
 
