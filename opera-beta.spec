@@ -1,12 +1,12 @@
 %global build_for_x86_64 1
-%global build_for_i386 1
+%global build_for_i386 0
 %global build_from_rpm 1
 %define debug_package %{nil}
 
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    35.0.2066.35
+Version:    36.0.2130.2
 Release:    1%{dist}
 Epoch:      5
 
@@ -118,13 +118,14 @@ popd
     %endif
 %endif
 
-# Modify DOC directory and *.desktop file:
+# Modify DOC directory, *.desktop file and ffmpeg_preload_config.json:
 if [ -d %{buildroot}%{_datadir}/doc/%{name}/ ]; then
     mv %{buildroot}%{_datadir}/doc/%{name} %{buildroot}%{_datadir}/doc/%{name}-%{version}
 else
     mkdir -p %{buildroot}%{_datadir}/doc/%{name}-%{version}
 fi
 sed -e 's/TargetEnvironment=Unity/#TargetEnvironment=Unity/g' -i %{buildroot}%{_datadir}/applications/%{name}.desktop
+sed -e 's|/usr/lib/chromium-browser/libs|%{_libdir}/%{name}/lib|g' -i %{buildroot}%{_libdir}/%{name}/resources/ffmpeg_preload_config.json
 
 # Install *.desktop file:
 desktop-file-install --vendor rfremix \
@@ -216,6 +217,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Feb 09 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:36.0.2130.2-1
+- Update to 36.0.2130.2
+- Fix ffmpeg_preload_config.json
+
 * Wed Jan 27 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:35.0.2066.35-1
 - Update to 35.0.2066.35
 
