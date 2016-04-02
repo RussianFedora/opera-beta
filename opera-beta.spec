@@ -6,7 +6,7 @@
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    36.0.2130.29
+Version:    37.0.2178.4
 Release:    1%{dist}
 Epoch:      5
 
@@ -217,6 +217,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Apr 02 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:37.0.2178.4-1
+- Update to 37.0.2178.4
+
 * Wed Mar 09 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:36.0.2130.29-1
 - Update to 36.0.2130.29
 - Move libffmpeg.so search path into */lib_extra/ instead */lib/
