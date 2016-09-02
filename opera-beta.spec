@@ -1,12 +1,12 @@
 %global build_for_x86_64 1
 %global build_for_i386 1
-%global build_from_rpm 1
+%global build_from_rpm 0
 %define debug_package %{nil}
 
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    40.0.2308.15
+Version:    40.0.2308.26
 Release:    1%{dist}
 Epoch:      5
 
@@ -217,6 +217,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Fri Sep 02 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:40.0.2308.26-1
+- Update to 40.0.2308.26
+
 * Thu Aug 18 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:40.0.2308.15-1
 - Update to 40.0.2308.15
 
