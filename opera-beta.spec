@@ -6,7 +6,7 @@
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    40.0.2308.44
+Version:    42.0.2393.14
 Release:    1%{dist}
 Epoch:      5
 
@@ -217,6 +217,12 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Tue Nov 08 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:42.0.2393.14-1
+- Update to 42.0.2393.14
+
+* Sun Oct 23 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:41.0.2353.30-1
+- Update to 41.0.2353.30
+
 * Sat Sep 10 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:40.0.2308.44-1
 - Update to 40.0.2308.44
 
