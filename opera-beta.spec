@@ -8,9 +8,9 @@ Summary(ru):    Быстрый и безопасный Веб-браузер (б
 Name:           opera-beta
 Version:    43.0.2442.21
 %if 0%{?fedora} >= 25
-Release:	1%{?dist}.R
+Release:	2%{?dist}.R
 %else
-Release:	1%{?dist}
+Release:	2%{?dist}
 %endif
 Epoch:      5
 
@@ -221,7 +221,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
-* Thu Jan 12 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:43.0.2442.21-1
+* Thu Jan 12 2017 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:43.0.2442.21-2
+- Fix bogus date and bump version
+
+* Thu Jan 12 2017 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:43.0.2442.21-1
 - Update to 43.0.2442.21
 
 * Fri Dec 23 2016 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:43.0.2442.7-2
