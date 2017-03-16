@@ -6,7 +6,7 @@
 Summary:        Fast and secure web browser (Beta stream)
 Summary(ru):    Быстрый и безопасный Веб-браузер (бета-версия)
 Name:           opera-beta
-Version:    44.0.2510.433
+Version:    44.0.2510.849
 %if 0%{?fedora} >= 25
 Release:	1%{?dist}.R
 %else
@@ -221,6 +221,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Mar 16 2017 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:44.0.2510.849-1
+- Update to 44.0.2510.849
+
 * Sat Mar 11 2017 carasin berlogue <carasin DOT berlogue AT mail DOT ru> - 5:44.0.2510.433-1
 - Update to 44.0.2510.433
 
